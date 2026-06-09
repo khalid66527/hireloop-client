@@ -22,8 +22,8 @@ const RecruiterDashboardHomePage = () => {
     console.log("Session Data in Recruiter Deshboard Home page", user);
     return (
        
-            <div className=" w-full ">
-                <div className=" w-full bg-blue-600 min-h-screen space-y-6">
+            
+                <div className=" w-full p-5 bg-black min-h-screen space-y-6">
                     <h1 className="text-2xl font-bold text-white">Recruiter Overview</h1>
                     <h1 className='text-xl text-white'>WelCome Back , ` {user?.name} ` </h1>
 
@@ -31,7 +31,7 @@ const RecruiterDashboardHomePage = () => {
                     <DashboardStats data={recruiterStats}></DashboardStats>
 
                 </div>
-            </div>
+    
     );
 };
 
