@@ -1,25 +1,27 @@
 "use client";
 
 import React, { useState } from "react";
-import { 
-  Form, 
-  Fieldset, 
-  Input, 
-  TextArea, 
-  Button, 
+import {
+  Form,
+  Fieldset,
+  Input,
+  TextArea,
+  Button,
   Switch,
   Label,
   ListBox,
   Select
 } from "@heroui/react";
 
+// Gravity UI Icons Integration
 import { ArrowRight, ChevronDown, Suitcase } from "@gravity-ui/icons";
 
+// Mock Data for the Recruiter's Company context
 const MOCK_COMPANY = {
   id: "comp_98765",
   name: "HireLoop Tech",
   isApproved: true,
-  plan: "Free", 
+  plan: "Free",
   activeJobsCount: 1,
   limits: { Free: 3, Growth: 10, Enterprise: 50 }
 };
@@ -57,9 +59,10 @@ export default function PostJobPage() {
   };
 
   const handleSwitchChange = (isSelected) => {
-    setFormData((prev) => ({ 
-      ...prev, 
+    setFormData((prev) => ({
+      ...prev,
       isRemote: isSelected,
+      // Automatically populates "Remote" or clears it back to empty when toggled off
       location: isSelected ? "Remote" : prev.location === "Remote" ? "" : prev.location
     }));
   };
@@ -80,7 +83,7 @@ export default function PostJobPage() {
       console.log("Job Successfully Posted:", payload);
       setLoading(false);
       setSuccessMessage("Job has been successfully created and is now publicly active!");
-      
+
       setFormData({
         title: "",
         category: "",
@@ -101,7 +104,7 @@ export default function PostJobPage() {
   return (
     <div className="min-h-screen bg-[#09090b] text-zinc-100 p-6 flex justify-center items-center">
       <div className="w-full max-w-3xl bg-[#18181b] rounded-xl border border-zinc-800 p-8 shadow-2xl">
-        
+
         {/* Header Block */}
         <div className="mb-8 border-b border-zinc-800 pb-6">
           <h1 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
@@ -113,9 +116,8 @@ export default function PostJobPage() {
         </div>
 
         {/* Company Plan Usage Guardrail */}
-        <div className={`mb-6 p-4 rounded-lg flex items-center justify-between text-sm border ${
-          isLimitReached ? "bg-red-950/30 border-red-800 text-red-200" : "bg-zinc-900/50 border-zinc-800 text-zinc-300"
-        }`}>
+        <div className={`mb-6 p-4 rounded-lg flex items-center justify-between text-sm border ${isLimitReached ? "bg-red-950/30 border-red-800 text-red-200" : "bg-zinc-900/50 border-zinc-800 text-zinc-300"
+          }`}>
           <div>
             <p className="font-semibold">
               Posting as: <span className="text-white">{MOCK_COMPANY.name}</span> ({MOCK_COMPANY.plan} Plan)
@@ -144,11 +146,11 @@ export default function PostJobPage() {
         )}
 
         <Form onSubmit={handleSubmit} className="space-y-8" validationBehavior="native">
-          
+
           {/* SECTION 1: JOB INFO */}
           <Fieldset className="space-y-5">
             <legend className="text-lg font-semibold text-white mb-2">Job Details</legend>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
               <Input
                 required
@@ -162,8 +164,8 @@ export default function PostJobPage() {
               />
 
               {/* Composable Select: Job Category */}
-              <Select 
-                className="w-full" 
+              <Select
+                className="w-full"
                 placeholder="Select a category"
                 selectedKey={formData.category}
                 onSelectionChange={(key) => handleSelectChange("category", key)}
@@ -185,8 +187,8 @@ export default function PostJobPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
               {/* Composable Select: Job Type */}
-              <Select 
-                className="w-full" 
+              <Select
+                className="w-full"
                 placeholder="Select type"
                 selectedKey={formData.type}
                 onSelectionChange={(key) => handleSelectChange("type", key)}
@@ -221,32 +223,38 @@ export default function PostJobPage() {
 
             {/* Salary Setup */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full items-end">
-              <Input
-                required
-                type="number"
-                label="Min Salary"
-                name="minSalary"
-                placeholder="0"
-                variant="flat"
-                value={formData.minSalary}
-                onChange={handleInputChange}
-                className="bg-zinc-900 border border-zinc-800 h-11 rounded-xl"
-              />
+              <div>
+                <Label className="text-xs text-zinc-400 font-medium mb-1 block">Minimum Salary</Label>
+                <Input
+                  required
+                  type="number"
+                  label="Min Salary"
+                  name="minSalary"
+                  placeholder="0"
+                  variant="flat"
+                  value={formData.minSalary}
+                  onChange={handleInputChange}
+                  className="bg-zinc-900 border border-zinc-800 h-11 rounded-xl"
+                />
+              </div>
 
-              <Input
-                required
-                type="number"
-                label="Max Salary"
-                name="maxSalary"
-                placeholder="0"
-                variant="flat"
-                value={formData.maxSalary}
-                onChange={handleInputChange}
-                className="bg-zinc-900 border border-zinc-800 h-11 rounded-xl"
-              />
+              <div>
+                <Label className="text-xs text-zinc-400 font-medium mb-1 block">Maximum Salary</Label>
+                <Input
+                  required
+                  type="number"
+                  label="Max Salary"
+                  name="maxSalary"
+                  placeholder="0"
+                  variant="flat"
+                  value={formData.maxSalary}
+                  onChange={handleInputChange}
+                  className="bg-zinc-900 border border-zinc-800 h-11 rounded-xl"
+                />
+              </div>
 
               {/* Composable Select: Currency */}
-              <Select 
+              <Select
                 className="w-full"
                 selectedKey={formData.currency}
                 onSelectionChange={(key) => handleSelectChange("currency", key)}
@@ -269,35 +277,51 @@ export default function PostJobPage() {
             {/* Location & Toggles */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full items-center pt-2">
               <div className="md:col-span-2">
+                <Label className="text-xs text-zinc-400 font-medium mb-1 block">Location</Label>
                 <Input
                   required={!formData.isRemote}
-                  disabled={formData.isRemote}
+                  isDisabled={formData.isRemote} // Remote অন থাকলে ইনপুট ডিজেবল হবে
                   label="Location"
                   name="location"
                   placeholder={formData.isRemote ? "Everywhere (Remote)" : "e.g. New York, USA"}
                   variant="flat"
-                  value={formData.location}
+                  // Remote অন থাকলে ভ্যালু ক্লিয়ার রাখবে, অফ থাকলে স্টেট ভ্যালু দেখাবে
+                  value={formData.isRemote ? "" : (formData.location || "")}
                   onChange={handleInputChange}
-                  className="bg-zinc-900 border border-zinc-800 disabled:opacity-40 h-11 rounded-xl"
+                  className="bg-zinc-900 border border-zinc-800 h-11 rounded-xl"
                 />
               </div>
 
+              {/* HeroUI Switch State Integration */}
               <div className="flex items-center justify-start md:justify-end h-full pt-4 md:pt-0">
-                <Switch 
-                  isSelected={formData.isRemote} 
-                  onValueChange={handleSwitchChange}
-                  className="group"
+                <Switch
+                  isSelected={formData.isRemote}
+                  onChange={(isSelected) => {
+
+                    setFormData((prev) => ({
+                      ...prev,
+                      isRemote: isSelected,
+
+                      location: isSelected ? "" : prev.location
+                    }));
+                  }}
                 >
-                  <span className="text-sm text-zinc-300">Remote Position</span>
+                  <Switch.Control>
+                    <Switch.Thumb />
+                  </Switch.Control>
+                  <Switch.Content>
+                    <Label className="text-sm">Remote</Label>
+                  </Switch.Content>
                 </Switch>
               </div>
             </div>
+
           </Fieldset>
 
           {/* SECTION 2: JOB DESCRIPTION */}
           <Fieldset className="space-y-4 pt-6 border-t border-zinc-800">
             <legend className="text-lg font-semibold text-white mb-2">Job Context</legend>
-            
+
             <TextArea
               required
               label="Responsibilities"
@@ -336,23 +360,22 @@ export default function PostJobPage() {
 
           {/* Footer Navigation Action Group */}
           <div className="flex items-center justify-end gap-4 border-t border-zinc-800 pt-6">
-            <Button 
+            <Button
               type="button"
-              variant="bordered" 
+              variant="bordered"
               className="border-zinc-700 bg-transparent text-zinc-300 hover:bg-zinc-900 font-medium rounded-lg px-6"
             >
               Cancel
             </Button>
-            
+
             <Button
               type="submit"
               isLoading={loading}
               disabled={!canPost}
-              className={`font-bold rounded-lg px-8 flex items-center gap-2 ${
-                canPost 
-                  ? "bg-white text-black hover:bg-zinc-200" 
-                  : "bg-zinc-800 text-zinc-500 cursor-not-allowed"
-              }`}
+              className={`font-bold rounded-lg px-8 flex items-center gap-2 ${canPost
+                ? "bg-white text-black hover:bg-zinc-200"
+                : "bg-zinc-800 text-zinc-500 cursor-not-allowed"
+                }`}
             >
               Publish Listing <ArrowRight size={16} />
             </Button>
