@@ -10,11 +10,14 @@ import {
   Switch,
   Label,
   ListBox,
-  Select
+  Select,
+  toast
 } from "@heroui/react";
 
 // Gravity UI Icons Integration
 import { ArrowRight, ChevronDown, Suitcase } from "@gravity-ui/icons";
+import { createJob } from "@/lib/actions/jobs";
+import { redirect } from "next/navigation";
 
 // Mock Data for the Recruiter's Company context
 const MOCK_COMPANY = {
@@ -63,7 +66,7 @@ export default function PostJobPage() {
       ...prev,
       isRemote: isSelected,
       // Automatically populates "Remote" or clears it back to empty when toggled off
-      location: isSelected ? "Remote" : prev.location === "Remote" ? "" : prev.location
+      location: isSelected ? "Remote" : prev.location === "Location" ? "" : prev.location
     }));
   };
 
@@ -99,6 +102,16 @@ export default function PostJobPage() {
         benefits: ""
       });
     }, 1500);
+
+    // funtionlaty korchi action.js a ekne call kore data patacchi
+    
+    const res = await createJob(payload)
+    if(res.insertedId){
+      toast.success("Jobs Posted Successfully")
+      e.target.reset();
+      // setIsRemote(false)
+      redirect("/dashboard/recruiter")
+    }
   };
 
   return (
