@@ -69,6 +69,7 @@ export default function PostJobPage() {
       location: isSelected ? "Remote" : prev.location === "Location" ? "" : prev.location
     }));
   };
+  const [isRemote, setIsRemote] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -104,13 +105,14 @@ export default function PostJobPage() {
     }, 1500);
 
     // funtionlaty korchi action.js a ekne call kore data patacchi
-    
+
     const res = await createJob(payload)
-    if(res.insertedId){
+  
+    if (res.insertedId) {
       toast.success("Jobs Posted Successfully")
       e.target.reset();
-      // setIsRemote(false)
-      redirect("/dashboard/recruiter")
+      setIsRemote(false);   // 👈 এটা কাজ করবে এখন
+      redirect("/dashboard/recruiter/jobs")
     }
   };
 
