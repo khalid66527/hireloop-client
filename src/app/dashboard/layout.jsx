@@ -1,4 +1,5 @@
 import { DashboardSidebar } from "@/components/dashboard/DashboardSideBar";
+import { ToastContainer } from "react-toastify";
 
 
 const DashboardLayout = ({children}) => {
@@ -14,6 +15,7 @@ const DashboardLayout = ({children}) => {
       {/* 'flex-1' dewar karone sidebar er por joto faka width ache, shob eita niye nibe */}
       <div className="flex-1 w-full flex flex-col">
         {children}
+        <ToastContainer />
       </div>
       
     </div>
