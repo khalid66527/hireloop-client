@@ -9,7 +9,7 @@ export default function AppNavbar() {
 
   // Better Auth Session Hook
   const { data: session, isPending } = useSession();
-console.log("session", session, "isPending", isPending)
+// console.log("session", session, "isPending", isPending)
 
   const handleSignOut = async () => {
     await signOut({

@@ -1,11 +1,13 @@
 import JobTable from '@/components/dashboard/JobTable';
+import { getLoggdInRecruiterCompany } from '@/lib/api/company';
 import { getCompany } from '@/lib/api/jobs';
 import React from 'react';
 
 
 const RecruiterJobs = async () => {
-    const companyId = 'comp_98765';
-    const res = await getCompany(companyId);
+    const company =await getLoggdInRecruiterCompany()
+
+    const res = await getCompany(company._id);
     
     // API থেকে আসা রেসপন্সটি অ্যারে হিসেবে ধরে নিচ্ছি। 
     // যদি আপনার API রেসপন্স { data: [...] } ফরম্যাটে থাকে, তাহলে res.data পাস করবেন।

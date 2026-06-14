@@ -29,13 +29,13 @@ import {
 import { createCompany } from "@/lib/actions/company";
 import { toast } from "react-toastify";
 
-const CompanyProfile = () => {
+const CompanyProfile = ({recruiter ,recruiterCompany}) => {
   const [isOpen, setIsOpen] = useState(false);
   const onOpen = () => setIsOpen(true);
 
   const fileInputRef = useRef(null);
 
-  const [company, setCompany] = useState(null);
+  const [company, setCompany] = useState(recruiterCompany);
   const [loading, setLoading] = useState(false);
   const [uploadingLogo, setUploadingLogo] = useState(false);
 
@@ -102,6 +102,7 @@ const CompanyProfile = () => {
       ...extractedData,
       logo: formData.logo,
       status: company ? company.status : "Pending",
+      recruiterId:recruiter.id
     };
     // setCompany(finalPayload)
 
