@@ -160,14 +160,14 @@ const CompanyProfile = ({recruiter ,recruiterCompany}) => {
           <p className="text-sm text-zinc-400 mt-1">Manage your business details and hiring presence.</p>
         </div>
 
-        {!company && (
+        {!company._id && (
           <Button onPress={onOpen} className="bg-white text-black font-semibold rounded-lg px-6">
             Register Company
           </Button>
         )}
       </div>
 
-      {!company ? (
+      {!company._id ? (
         <div className="flex flex-col items-center justify-center p-12 border border-dashed border-zinc-700 rounded-2xl bg-[#18181b] text-center">
           <OfficeBadge className="size-16 text-zinc-600 mb-4" />
           <h2 className="text-xl font-semibold text-white mb-2">No Company Registered Yet</h2>
@@ -311,7 +311,7 @@ const CompanyProfile = ({recruiter ,recruiterCompany}) => {
                             placeholder="City, Country"
                           />
                         </div>
-                      </div>
+                      </div>  
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full items-start">
