@@ -10,6 +10,9 @@ const JobDetailsPage = async ({ params }) => {
     const { id } = await params;
     const job = await getJobsId(id);
 
+     console.log("job id data " ,job);
+
+
     if (!job) {
         return <div className="text-center py-10">Job not found.</div>;
     }
@@ -61,10 +64,12 @@ const JobDetailsPage = async ({ params }) => {
                         </div>
                     </div>
 
-                    <Button color="primary" size="lg"                   className="text-center py-3 bg-purple-600 text-white rounded-xl"
+                    <Link 
+                    href={`/jobs/${job._id}/apply`} 
+                    size="lg"                   className="text-center p-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl"
                     >
                         Apply Now
-                    </Button>
+                    </Link>
                 </Card.Content>
             </Card>
 

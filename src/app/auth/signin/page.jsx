@@ -4,12 +4,19 @@ import { useState } from "react";
 import Link from "next/link";
 import { signIn } from "@/lib/auth-client";
 import { At, Key, Eye, EyeSlash } from "@gravity-ui/icons";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function SignInPage() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const router =  useRouter()
+  const searchParams = useSearchParams()
+  const redirectTo = searchParams.get('redirect');
+  // console.log("Redirect To",redirectTo);
+
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -29,16 +36,16 @@ export default function SignInPage() {
       const { data, error: authError } = await signIn.email({
         email: formData.email,
         password: formData.password,
-        callbackURL: "/",
+
       });
 
       if (authError) {
         setError(authError.message || "Invalid email or password.");
         return;
       }
-
+      router.push(redirectTo)
       // Successful login redirect
-      window.location.href = "/";
+      // window.location.href = "/";
     } catch (err) {
       setError(err.message || "An unexpected error occurred.");
     } finally {
@@ -163,7 +170,7 @@ export default function SignInPage() {
           {/* Link to Sign Up */}
           <div className="mt-8 text-center text-xs text-zinc-500">
             Don&apos;t have an account?{" "}
-            <Link href="/auth/signup" className="font-semibold text-purple-400 hover:text-purple-300 hover:underline transition-colors">
+            <Link href={`/auth/signup?redirect=${redirectTo}`} className="font-semibold text-purple-400 hover:text-purple-300 hover:underline transition-colors">
               Create Account
             </Link>
           </div>
