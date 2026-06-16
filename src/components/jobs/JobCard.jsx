@@ -37,8 +37,10 @@ export default function JobCard({ job }) {
         <div className="flex items-center gap-2.5 mb-1">
           <img 
             src={logoSrc} 
-            alt={`${companyName} Logo`} 
-            className="w-7 h-7 rounded-full object-cover border border-zinc-700/50 bg-zinc-800"
+            alt={`${companyName} Logo`}
+            width={55} 
+            height={50}
+            className="rounded-full object-cover border border-zinc-700/50 bg-zinc-800"
           />
           <span className="text-sm font-medium text-zinc-400 group-hover:text-zinc-300 transition-colors">
             {companyName}
@@ -94,7 +96,7 @@ export default function JobCard({ job }) {
         
         {/* Dynamic Link to Job Details Page */}
         <Link 
-          href={`/jobs/${job._id || job.id}`} 
+          href={`/jobs/${job._id}`} 
           className="flex items-center gap-1.5 text-sm font-semibold text-white group/btn hover:text-[#fca5a5] transition-colors duration-200"
         >
           Apply Now

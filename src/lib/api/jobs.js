@@ -1,13 +1,18 @@
-import { ServerFrtch } from "../core/server"
+// import { ServerFetch } from "../core/server"
+
+import { ServerFetch } from "../core/server"
 
 const baseUrl =process.env.NEXT_PUBLIC_BASE_URL
 
 export const getJobs = async ()=>{
    
-    return ServerFrtch('/api/jobs')
+    return ServerFetch('/api/jobs')
     // const res = await fetch(`${baseUrl}/api/jobs`)
     // return res.json()
+}
 
+export const getJobsId =  async (jobId)=>{
+return ServerFetch(`/api/jobs/${jobId}`)
 }
 
 

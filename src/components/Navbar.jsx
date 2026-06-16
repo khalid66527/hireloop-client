@@ -25,7 +25,7 @@ export default function AppNavbar() {
     { name: "Home", href: "/" },
     { name: "Jobs", href: "/jobs" },
     { name: "Companies", href: "/companies" },
-    { name: "Dashboard", href: "/dashboard" },
+    { name: "Dashboard", href: "/dashboard/recruiter" },
   ];
 
   return (

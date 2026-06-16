@@ -1,4 +1,4 @@
-import { ServerFrtch } from "../core/server"
+import { ServerFetch } from "../core/server"
 import { getUserSession } from "../core/session"
 
 // const baseUrl =process.env.NEXT_PUBLIC_BASE_URL
@@ -10,7 +10,7 @@ import { getUserSession } from "../core/session"
 
 
 export const getRecruiterCompany = async (recruiterId)=>{
-  return ServerFrtch(`/api/my/company?recruiterId =${recruiterId}`)
+  return ServerFetch(`/api/my/company?recruiterId =${recruiterId}`)
   
 }
 

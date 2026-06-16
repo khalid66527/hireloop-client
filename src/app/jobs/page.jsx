@@ -1,13 +1,12 @@
 import React from "react";
-
-import JobCard from "@/components/JobCard";
 import { getJobs } from "@/lib/api/jobs";
+import JobsListClient from "@/components/jobs/JobsListClient"; // নতুন ক্লায়েন্ট কম্পোনেন্ট
 
 export default async function JobsPage() {
   // API থেকে ডেটা ফেচ করা হচ্ছে
   const jobs = await getJobs(); 
 
-  // যদি ডেটা না থাকে বা খালি অ্যারে হয়
+  // যদি ডেটা না থাকে বা খালি অ্যারে হয়
   if (!jobs || jobs.length === 0) {
     return (
       <div className="min-h-screen bg-[#09090b] flex items-center justify-center text-zinc-400">
@@ -30,13 +29,8 @@ export default async function JobsPage() {
           </p>
         </div>
 
-        {/* Jobs Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {jobs.map((job) => (
-            // _id বা id যেটি আপনার ডেটাবেস থেকে আসছে, সেটি key হিসেবে ব্যবহার করুন
-            <JobCard key={job._id || job.id} job={job} />
-          ))}
-        </div>
+        {/* Client Component যেখানে ফিল্টার এবং গ্রিড থাকবে */}
+        <JobsListClient initialJobs={jobs} />
 
       </div>
     </div>
