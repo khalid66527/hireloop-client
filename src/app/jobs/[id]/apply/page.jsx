@@ -3,13 +3,25 @@ import { getUserSession } from '@/lib/core/session';
 import { redirect } from 'next/navigation';
 import React from 'react';
 import JobApply from './JobApply';
+import { getApplicantionByApplicat } from '@/lib/api/application';
 
 const ApplyPage = async ({ params }) => {
     const { id } = await params
     const job = await getJobsId(id)
-    console.log("job id data 2" ,job);
-
+    
     const user = await getUserSession()
+    console.log("user",user);
+    
+        const applicantions  = await getApplicantionByApplicat(user?.id)
+        console.log('applications',applicantions);
+
+        const plan = {
+            name: 'Free',
+            maxApplicationPerMonth: 3
+        }
+         
+
+    
     if (!user) {
         redirect(`/auth/signin?redirect=/jobs/${id}/apply`)
     }
@@ -31,7 +43,8 @@ const ApplyPage = async ({ params }) => {
  
     return (
         <div>
-            <JobApply job={job}></JobApply>
+            <h2>You have applied so gar : {applicantions.length} out of {plan.maxApplicationPerMonth} this month </h2>
+            {applicantions.length < plan.maxApplicationPerMonth && (<JobApply job={job}></JobApply>)}
         </div>
     );
 };

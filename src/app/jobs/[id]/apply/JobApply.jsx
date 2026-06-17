@@ -18,8 +18,9 @@ const JobApply = ({ job }) => {
 
     const data = {
       ...formValues,
-      userName: session?.user?.name || "Unknown User",
-      userEmail: session?.user?.email || "No Email",
+      applicantId: session?.user?.id || "applicatId",
+      applicantName: session?.user?.name || "Unknown User",
+      applicantEmail: session?.user?.email || "No Email",
       jobTitle: job?.title,
       jobId: job?._id,
       companyName: job?.companyName,
@@ -83,7 +84,7 @@ const JobApply = ({ job }) => {
             {/* Cover Letter (অরিজিনাল ডিজাইন এবং নো-এরর টেক্সট-এরিয়া) */}
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-300 ml-1">
-                Cover Letter <span className="text-gray-500 font-normal">(Optional)</span>
+                Short Message / Nodes <span className="text-gray-500 font-normal">(Optional)</span>
               </label>
               <textarea
                 name="additionalNotes"

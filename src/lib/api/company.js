@@ -10,7 +10,7 @@ import { getUserSession } from "../core/session"
 
 
 export const getRecruiterCompany = async (recruiterId)=>{
-  return ServerFetch(`/api/my/company?recruiterId =${recruiterId}`)
+  return ServerFetch(`/api/my/company?recruiterId=${recruiterId}`)
   
 }
 
