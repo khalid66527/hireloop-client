@@ -25,7 +25,6 @@ export default function JobCard({ job }) {
   
   const companyName = job.companyName || "Company Name";
   const logoSrc = job.companyLogo ;
-  console.log('image paichi ',logoSrc)
 
   return (
     <Card 

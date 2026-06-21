@@ -15,7 +15,6 @@ export default function SignInPage() {
   const router =  useRouter()
   const searchParams = useSearchParams()
   const redirectTo = searchParams.get('redirect');
-  // console.log("Redirect To",redirectTo);
 
 
   const [loading, setLoading] = useState(false);

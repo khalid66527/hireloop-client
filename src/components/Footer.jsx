@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import Link from "next/link";
 import { LogoFacebook, LogoLinkedin, LogoGithub } from "@gravity-ui/icons";

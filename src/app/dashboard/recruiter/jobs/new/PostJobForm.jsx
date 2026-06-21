@@ -85,7 +85,7 @@ export default function PostJobForm({ company }) {
         setIsRemote(false);
       }
     } catch (error) {
-      console.error("Error creating job:", error);
+      error("Error creating job:", error);
       toast.error("Failed to post job. Please try again.");
     } finally {
       setLoading(false);

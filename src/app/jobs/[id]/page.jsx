@@ -10,7 +10,6 @@ const JobDetailsPage = async ({ params }) => {
     const { id } = await params;
     const job = await getJobsId(id);
 
-     console.log("job id data " ,job);
 
 
     if (!job) {
@@ -18,7 +17,6 @@ const JobDetailsPage = async ({ params }) => {
     }
     const companyName = job.companyName || "Company Name";
     const logoSrc = job.companyLogo;
-    console.log('image paichi ', companyName)
 
     const formattedDeadline = new Date(job.deadline).toLocaleDateString('en-US', {
         month: 'short',

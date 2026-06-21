@@ -30,6 +30,8 @@ import { createCompany } from "@/lib/actions/company";
 import { toast } from "react-toastify";
 
 const CompanyProfile = ({recruiter ,recruiterCompany}) => {
+
+  
   const [isOpen, setIsOpen] = useState(false);
   const onOpen = () => setIsOpen(true);
 
@@ -81,7 +83,6 @@ const CompanyProfile = ({recruiter ,recruiterCompany}) => {
         setFormData((prev) => ({ ...prev, logo: data.data.url }));
       }
     } catch (error) {
-      console.error("Logo upload failed", error);
     } finally {
       setUploadingLogo(false);
     }
@@ -106,7 +107,6 @@ const CompanyProfile = ({recruiter ,recruiterCompany}) => {
     };
     // setCompany(finalPayload)
 
-    console.log("company profile create successfully !", finalPayload);
 
 
 
@@ -124,7 +124,6 @@ const CompanyProfile = ({recruiter ,recruiterCompany}) => {
       setIsOpen(false);
 
     } catch (error) {
-      console.error("Submission error:", error);
 
     } finally {
       setLoading(false);
@@ -415,3 +414,193 @@ const CompanyProfile = ({recruiter ,recruiterCompany}) => {
 };
 
 export default CompanyProfile;
+
+// <form onSubmit={handleSubmit} className="space-y-8">
+          
+//           {/* Grid Layout Fields */}
+//           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+//             {/* Company Name */}
+//             <div className="space-y-2">
+//               <label className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
+//                 Company Name
+//               </label>
+//               <input
+//                 name="companyName"
+//                 type="text"
+//                 required
+//                 value={formData.companyName}
+//                 onChange={handleInputChange}
+//                 placeholder="e.g. Acme Art Gallery"
+//                 className="w-full bg-[#1A1A1A]/60 border border-[#D4AF37]/20 focus:border-[#D4AF37] rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-[#D4AF37]/30 transition-all text-sm"
+//               />
+//             </div>
+
+//             {/* Category Dropdown */}
+//             <div className="space-y-2">
+//               <label className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
+//                 Category
+//               </label>
+//               <div className="relative">
+//                 <select
+//                   name="category"
+//                   required
+//                   value={formData.category}
+//                   onChange={handleInputChange}
+//                   className="w-full bg-[#1A1A1A] border border-[#D4AF37]/20 focus:border-[#D4AF37] rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-1 focus:ring-[#D4AF37]/30 transition-all text-sm appearance-none cursor-pointer"
+//                 >
+//                   <option value="" disabled className="text-gray-500">
+//                     Select Category
+//                   </option>
+//                   {categories.map((cat) => (
+//                     <option key={cat} value={cat} className="bg-[#161616]">
+//                       {cat}
+//                     </option>
+//                   ))}
+//                 </select>
+//                 <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
+//                   <Icon icon="solar:alt-arrow-down-linear" />
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* Website URL */}
+//             <div className="space-y-2">
+//               <label className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
+//                 Website
+//               </label>
+//               <input
+//                 name="website"
+//                 type="url"
+//                 value={formData.website}
+//                 onChange={handleInputChange}
+//                 placeholder="https://example.com"
+//                 className="w-full bg-[#1A1A1A]/60 border border-[#D4AF37]/20 focus:border-[#D4AF37] rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-[#D4AF37]/30 transition-all text-sm"
+//               />
+//             </div>
+
+//             {/* Location */}
+//             <div className="space-y-2">
+//               <label className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
+//                 Location
+//               </label>
+//               <input
+//                 name="location"
+//                 type="text"
+//                 value={formData.location}
+//                 onChange={handleInputChange}
+//                 placeholder="City, Country"
+//                 className="w-full bg-[#1A1A1A]/60 border border-[#D4AF37]/20 focus:border-[#D4AF37] rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-[#D4AF37]/30 transition-all text-sm"
+//               />
+//             </div>
+
+//             {/* Employee Count Range */}
+//             <div className="space-y-2">
+//               <label className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
+//                 Employee Count Range
+//               </label>
+//               <div className="relative">
+//                 <select
+//                   name="employeeCountRange"
+//                   value={formData.employeeCountRange}
+//                   onChange={handleInputChange}
+//                   className="w-full bg-[#1A1A1A] border border-[#D4AF37]/20 focus:border-[#D4AF37] rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-1 focus:ring-[#D4AF37]/30 transition-all text-sm appearance-none cursor-pointer"
+//                 >
+//                   <option value="" className="text-gray-500">Select Range</option>
+//                   <option value="1-10" className="bg-[#161616]">1 - 10 employees</option>
+//                   <option value="11-50" className="bg-[#161616]">11 - 50 employees</option>
+//                   <option value="51-200" className="bg-[#161616]">51 - 200 employees</option>
+//                   <option value="201-500" className="bg-[#161616]">201 - 500 employees</option>
+//                   <option value="500+" className="bg-[#161616]">500+ employees</option>
+//                 </select>
+//                 <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
+//                   <Icon icon="solar:alt-arrow-down-linear" />
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Company Logo Upload & Real-time Preview */}
+//           <div className="space-y-4">
+//             <label className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
+//               Company Logo
+//             </label>
+            
+//             <div className="flex items-center gap-5">
+//               <button
+//                 type="button"
+//                 onClick={() => fileInputRef.current?.click()}
+//                 className="flex size-14 cursor-pointer items-center justify-center rounded-xl border border-dashed border-[#D4AF37]/40 bg-[#1A1A1A]/60 transition-all hover:bg-[#1A1A1A] relative overflow-hidden shrink-0 group focus:outline-none focus:ring-1 focus:ring-[#D4AF37]"
+//               >
+//                 {formData.companyLogo ? (
+//                   <img src={formData.companyLogo} alt="Logo Preview" className="w-full h-full object-cover" />
+//                 ) : (
+//                   <Icon icon="solar:upload-linear" className="size-6 text-[#D4AF37]/70 group-hover:scale-110 transition-transform" />
+//                 )}
+//               </button>
+
+//               <input
+//                 type="file"
+//                 name="companyLogoInput"
+//                 accept="image/*"
+//                 className="hidden"
+//                 ref={fileInputRef}
+//                 onChange={handleLogoUpload}
+//               />
+
+//               <div className="flex flex-col">
+//                 <span className="text-sm font-medium text-white">
+//                   {uploadingLogo ? "Uploading to Cloud..." : "Upload Business Logo"}
+//                 </span>
+//                 <span className="text-xs text-gray-500 mt-0.5">PNG, JPG up to 5MB (Autosaved)</span>
+//               </div>
+//             </div>
+
+//             {/* Logo URL Preview Container */}
+//             {formData.companyLogo && (
+//               <div className="relative border border-[#D4AF37]/20 rounded-2xl overflow-hidden bg-[#161616] max-w-[200px] p-2 flex items-center justify-center group shadow-md animate-fadeIn">
+//                 <img
+//                   src={formData.companyLogo}
+//                   alt="Company Logo preview"
+//                   className="max-h-[120px] rounded-xl object-contain"
+//                 />
+//                 <button
+//                   type="button"
+//                   onClick={handleRemoveLogo}
+//                   className="absolute top-2 right-2 p-1.5 rounded-lg bg-red-500/80 hover:bg-red-600 text-white shadow-lg transition-all"
+//                   aria-label="Remove image"
+//                 >
+//                   <Icon icon="solar:trash-bin-trash-bold" className="size-4" />
+//                 </button>
+//               </div>
+//             )}
+//           </div>
+
+//           {/* Brief Description */}
+//           <div className="space-y-2">
+//             <label className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
+//               Brief Description
+//             </label>
+//             <textarea
+//               name="description"
+//               required
+//               rows={4}
+//               value={formData.description}
+//               onChange={handleInputChange}
+//               placeholder="Tell us about your company's mission, art culture, or corporate vision..."
+//               className="w-full bg-[#1A1A1A]/60 border border-[#D4AF37]/20 focus:border-[#D4AF37] rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-[#D4AF37]/30 transition-all text-sm resize-none"
+//             />
+//           </div>
+
+//           {/* Submit Action */}
+//           <div className="pt-4 border-t border-[#D4AF37]/10 flex justify-end items-center">
+//             <Button
+//               type="submit"
+//               disabled={loading || uploadingLogo}
+//               isLoading={loading}
+//               className="w-full sm:w-auto bg-gradient-to-r from-[#AA7C11] via-[#D4AF37] to-[#AA7C11] hover:brightness-110 text-black font-bold tracking-wide px-8 py-3 rounded-xl transition-all shadow-[0_4px_20px_rgba(212,175,55,0.25)]"
+//             >
+//               {loading ? "Saving Profile..." : "Save Profile"}
+//             </Button>
+//           </div>
+//         </form>
